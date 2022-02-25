@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer')
 const url = 'https://www.uniqlo.com/ca/en/products/E446359-000?colorCode=COL09&sizeCode=SMA003'
 const mailgun = require('mailgun-js')({
   apiKey: 'your-mailgun-api-key',
-  domain: 'your-domain',
+  domain: 'your-email-domain',
 })
 
 ;(async () => {
@@ -24,7 +24,7 @@ const mailgun = require('mailgun-js')({
     // Send an email
     await mailgun.messages().send(
       {
-        from: 'UNIQLO Stock Checker <community@mail.quorie.com>',
+        from: 'UNIQLO Stock Checker <anything@your-email-domain>',
         to: ['your-email-address'],
         subject: productData.name || 'UNIQLO Checker',
         text: `${productData.annotation === 'In Stock' ? '在庫あるよ' : '在庫ないよ'}\n${url}`,
